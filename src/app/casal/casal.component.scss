@@ -1,0 +1,55 @@
+.content{
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-casal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px 20px;
+    gap: 40px;
+
+    .title{
+        font-size: 40px;
+        font-weight: bold;
+        padding: 20px 0;
+        color: var(--primary-color);
+    }
+
+    .content-foto{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .content-historia{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .descricao-titulo{
+            font-size: 18px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .descricao-historia{
+            font-size: 16px;
+            color: var(--primary-color);
+            font-weight: 400;
+            .coracao{
+                color: red;
+            }
+        }
+
+    }
+
+}
