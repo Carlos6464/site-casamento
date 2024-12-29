@@ -3,6 +3,7 @@ import { MapaComponent } from '../components/mapa/mapa.component';
 
 
 
+
 @Component({
   selector: 'app-cerimonia',
   imports: [ MapaComponent],
@@ -10,7 +11,7 @@ import { MapaComponent } from '../components/mapa/mapa.component';
   styleUrl: './cerimonia.component.scss'
 })
 export class CerimoniaComponent implements OnInit {
-
+ 
 
   ngOnInit(): void {
     

@@ -1,9 +1,57 @@
 <div class="content">
 
-    <div class="content-presente">
-        <p class="title">Lista de presentes</p>
+    <div class="content-presente" style="flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px 20px;
+    gap: 40px;
+    display: flex;">
+        <p class="title" style="font-size: 40px;
+        font-weight: bold;
+        padding: 20px 0;
+        color: var(--primary-color);">Lista de presentes</p>
     
-       
-    </div>
+        <div class="pesquisa-filtro" style="display: flex;
+            width: 100%;
+            justify-content: space-between;">
+            <!-- Campo de Busca -->
+            <div class="search-bar" style="width: 40%;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#d0cfd4">
+                <path d="M10 2a8 8 0 0 1 6.32 12.9l4.39 4.4a1 1 0 0 1-1.42 1.4l-4.4-4.38A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"></path>
+              </svg>
+              <input type="text" placeholder="O que você procura?">
+            </div>
+        
+            <!-- Opção de Ordenação -->
+            <div class="sort-dropdown">
+              <span>Ordenar lista por:</span>
+              <span>A-Z</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                <path d="M7 10l5 5 5-5H7z"></path>
+              </svg>
+            </div>
+        </div>
+
+        <div class="lista-presentes-cards" style="width: 100%;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        justify-content: space-between;">
+            <div *ngFor="let presente of paginatedItems" class="product-card">
+                <img src="https://via.placeholder.com/200x150" alt="Produto">
+                <p class="product-name">{{presente.nome}}</p>
+                <p class="product-price">R$ 749</p>
+                <button class="product-button">Presentear</button>
+            </div>
+        </div>
+        <mat-paginator
+            [length]="length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPageChange($event)"
+            aria-label="Select page">
+        </mat-paginator>
     
 </div>
