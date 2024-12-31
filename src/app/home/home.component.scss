@@ -14,6 +14,7 @@
     justify-content: center;
     align-items: center;
     gap: 40px;
+    flex-wrap: wrap; /* Permite quebrar linha */
 }
 
 
@@ -131,6 +132,108 @@
             font-weight: 400;
             font-style: normal;
             color: var(--primary-color);
+        }
+    }
+}
+
+
+
+
+/* Estilos para telas menores (smartphones) */
+@media (max-width: 900px) {
+    .content-capa{
+        justify-content: flex-start;
+    }
+    .imgem-capa{
+        width: 100%;
+        img{
+            width: 100%;
+        }
+    }
+
+    .texto{
+        p{
+            font-size: 40px;
+        }
+    }
+
+    .data{
+        margin-left: 5px;
+        font-size: 15px;
+    }
+
+    .divisor{
+        height: 130px;
+        width: 7px;
+        border-radius: 8px;
+        background-color: var(--primary-color);
+    }
+
+    .caixa-texto{
+        gap: 20px;
+    }
+
+    .content-historia{
+        .content-texto-hitoria{
+            .descricao-historia{
+                padding: 0 20px;
+                font-size: 13px;
+            }
+        
+            .title-historia{
+                font-size: 13px;
+            }
+        }
+    }
+    
+}
+
+
+@media (max-width: 450px) {
+    .content-contagem{
+        .title-contagem{
+            font-size: 30px;
+        }
+    
+        .cards-contagem{
+            .card-contagem{
+                width: 70px;
+                height: 70px;
+
+    
+                span:nth-of-type(1) {
+                    font-size: 20px;
+                }
+    
+                span:nth-of-type(2) {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+}
+
+@media (max-width: 400px) {
+    .content-contagem{
+        .title-contagem{
+            font-size: 20px;
+        }
+
+        .cards-contagem{
+            .card-contagem{
+                width: 60px;
+                height: 60px;
+
+    
+                span:nth-of-type(1) {
+                    font-size: 15px;
+                }
+    
+                span:nth-of-type(2) {
+                    font-size: 10px;
+                }
+            }
         }
     }
 }
