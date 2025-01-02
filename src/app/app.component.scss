@@ -6,24 +6,155 @@
     align-items: center; /* Centraliza horizontalmente os elementos */
     gap: 20px; /* Espaçamento entre as seções */
   }
-  
+
   section {
     border-radius: 10px; /* Bordas arredondadas */
     // height: 100vh;
   }
-  
+
 //   /* Efeito ao passar o mouse em uma seção */
 //   section:hover {
 //     transform: translateY(-5px);
 //     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 //   }
-  
+
 //   /* Alternando cores de fundo para seções */
 //   section:nth-child(odd) {
 //     background-color: #f9f9f9; /* Cor clara */
 //   }
-  
+
 //   section:nth-child(even) {
 //     background-color: #eaeaea; /* Cor um pouco mais escura */
 //   }
-  
+
+
+.desktop-menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  z-index: 10000;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-color);
+}
+
+.desktop-menu ul li {
+  margin: 0 15px;
+}
+
+.desktop-menu ul li a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+// section {
+//   height: 100vh;
+//   padding: 20px;
+//   border-bottom: 1px solid #ddd;
+// }
+
+// section:nth-child(odd) {
+//   background-color: #f4f4f4;
+// }
+
+// section:nth-child(even) {
+//   background-color: #e4e4e4;
+// }
+
+
+/* Estilo do overlay (fundo fosco) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com opacidade */
+  z-index: 999; /* Fica abaixo do menu */
+}
+
+.hamburger-menu {
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 9000;
+}
+
+.hamburger-btn {
+  font-size: 30px;
+  background: var(--light-color);
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 12px;
+  margin-right: 10px;
+}
+
+/* Estilo do menu lateral que vai se expandir da esquerda para a direita */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Escondido à esquerda inicialmente */
+  width: 250px;  /* Largura do menu */
+  height: 100vh; /* Altura completa da tela */
+  background-color: var(--primary-color);
+  transition: left 0.3s ease-in-out; /* Transição suave */
+  z-index: 9000;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 20px;
+}
+
+.side-menu li {
+  padding: 15px 10px;
+  border-bottom: 1px solid #7e42c9b3;
+}
+
+.side-menu a {
+  color: var(--light-color);
+  text-decoration: none;
+  display: block;
+}
+
+.side-menu a:hover {
+  background-color: #444;
+}
+
+/* Menu aberto (desliza da esquerda para a direita) */
+.side-menu.open {
+  left: 0;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 600px) {
+  .desktop-menu {
+    display: none; /* Esconde o menu horizontal em telas pequenas */
+  }
+
+  .hamburger-btn {
+    font-size: 40px;
+  }
+}
+
+

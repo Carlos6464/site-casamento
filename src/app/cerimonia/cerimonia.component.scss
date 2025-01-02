@@ -11,22 +11,41 @@
     align-items: center;
     max-width: 1200px;
     width: 100%;
-    padding: 40px 20px;
+    padding: 60px 20px;
     gap: 40px;
-
-    .title{
-        font-size: 40px;
-        font-weight: bold;
-        color: var(--secondary-color);
-    }
-
-    .descricao-historia{
-        font-size: 16px;
-        color: var(--light-color);
-    }
-
     .mapa-site{
         width: 80%;
     }
 }
+
+
+.title{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    padding: 20px 0;
+}
+
+.descricao-historia{
+    font-size: 16px;
+    color: var(--light-color);
+    text-align: center;
+}
+
+
+@media (max-width: 450px) {
+    .title{
+        font-size: 30px;
+    }
+
+    .descricao-historia{
+        font-size: 13px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .title{
+        font-size: 20px;
+    }
+  }
 

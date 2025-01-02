@@ -1,49 +1,39 @@
 <div class="content">
 
-    <div class="content-presente" style="flex-direction: column;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
-    padding: 40px 20px;
-    gap: 40px;
-    display: flex;">
-        <p class="title" style="font-size: 40px;
-        font-weight: bold;
-        padding: 20px 0;
-        color: var(--primary-color);">Lista de presentes</p>
-    
-        <div class="pesquisa-filtro" style="display: flex;
-            width: 100%;
-            justify-content: space-between;">
+    <div class="content-presente">
+        <p class="title" >Lista de presentes</p>
+
+        <div class="pesquisa-filtro" >
             <!-- Campo de Busca -->
-            <div class="search-bar" style="width: 40%;">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#d0cfd4">
-                <path d="M10 2a8 8 0 0 1 6.32 12.9l4.39 4.4a1 1 0 0 1-1.42 1.4l-4.4-4.38A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"></path>
-              </svg>
-              <input type="text" placeholder="O que você procura?">
-            </div>
-        
+             <div class="search" style="display: flex; align-items: center; gap: 10px;">
+               <div class="search-bar">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#d0cfd4">
+                   <path d="M10 2a8 8 0 0 1 6.32 12.9l4.39 4.4a1 1 0 0 1-1.42 1.4l-4.4-4.38A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"></path>
+                 </svg>
+                 <input type="text" placeholder="O que você procura?" [(ngModel)]="filtro" >
+               </div>
+               <button class="product-button" (click)="filtroPresente()">Buscar</button>
+             </div>
+
             <!-- Opção de Ordenação -->
-            <div class="sort-dropdown">
-              <span>Ordenar lista por:</span>
-              <span>A-Z</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
-                <path d="M7 10l5 5 5-5H7z"></path>
-              </svg>
-            </div>
+             <div class="filtro-content">
+               <span>Ordenar lista por:</span>
+               <div class="sort-dropdown">
+                 <mat-select id="mySelectId"  [(ngModel)]="ordenar" (selectionChange)="ordenarPresentes()" >
+                  <mat-option value="a-z">A-Z</mat-option>
+                  <mat-option value="menor-preco">Menor preço</mat-option>
+                  <mat-option value="maior-preco">Maior preço</mat-option>
+                </mat-select>
+               </div>
+             </div>
         </div>
 
-        <div class="lista-presentes-cards" style="width: 100%;
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-top: 40px;
-        justify-content: space-between;">
+        <div class="lista-presentes-cards">
             <div *ngFor="let presente of paginatedItems" class="product-card">
                 <img src="https://via.placeholder.com/200x150" alt="Produto">
                 <p class="product-name">{{presente.nome}}</p>
-                <p class="product-price">R$ 749</p>
-                <button class="product-button">Presentear</button>
+                <p class="product-price">{{ presente.preco| currency:'BRL':'symbol':'1.2-2' }}</p>
+                <button class="product-button" (click)="showAlert(presente)">Presentear</button>
             </div>
         </div>
         <mat-paginator
@@ -53,5 +43,5 @@
             (page)="onPageChange($event)"
             aria-label="Select page">
         </mat-paginator>
-    
+
 </div>
