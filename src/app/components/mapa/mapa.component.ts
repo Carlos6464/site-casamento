@@ -17,8 +17,7 @@ export class MapaComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       // Carregar o Leaflet dinamicamente
-      import('leaflet').then((L) => {
-        setTimeout(() => {
+      import('leaflet').then((L: any) => {
           // Criar o mapa e definir a posição inicial
           this.map = L.map("map",{
             zoomControl: false, // Remove os controles de zoom
@@ -45,16 +44,6 @@ export class MapaComponent implements OnInit {
 
           // Associar o popup com o marcador
           marker.bindPopup(popupContent);
-
-          // Abre o popup automaticamente quando o marcador for adicionado ao mapa
-          // marker.openPopup();
-
-          // Adicionar mais interatividade: Exibir a posição do marcador ao clicar
-          // marker.on('click', function() {
-          //   alert(`Você clicou no marcador!\nLatitude: ${marker.getLatLng().lat}\nLongitude: ${marker.getLatLng().lng}`);
-          // });
-
-        }, 2000);
       }).catch(err => {
         console.error('Erro ao carregar o Leaflet', err);
       });
