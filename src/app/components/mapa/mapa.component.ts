@@ -36,8 +36,16 @@ export class MapaComponent implements OnInit {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           }).addTo(this.map);
 
+            // Definir um ícone personalizado para o marcador
+          const customIcon = leaflet.icon({
+            iconUrl: './assets/ping.png', // Caminho da imagem do marcador
+            iconSize: [32, 32], // Tamanho do ícone
+            iconAnchor: [16, 32], // Posição do âncora do ícone
+            popupAnchor: [0, -32], // Posição do popup
+          });
+
           // Criar um marcador em uma coordenada específica
-          const marker = leaflet.marker([-22.435247606044122, -44.04274307301314]).addTo(this.map);
+          const marker = leaflet.marker([-22.435247606044122, -44.04274307301314], { icon: customIcon }).addTo(this.map);
 
           // Informações que você deseja mostrar no popup
           const popupContent = `
