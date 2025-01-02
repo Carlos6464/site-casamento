@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import * as L from 'leaflet';
 
 @Component({
   selector: 'app-mapa',
@@ -18,8 +17,9 @@ export class MapaComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       // Carregar o Leaflet dinamicamente
       import('leaflet').then((L: any) => {
+        if (L && typeof L.map === 'function') {
           // Criar o mapa e definir a posição inicial
-          this.map = L.map("map",{
+          this.map = L.map("map", {
             zoomControl: false, // Remove os controles de zoom
             scrollWheelZoom: false, // Desativa o zoom com o scroll do mouse
             doubleClickZoom: false, // Desativa o zoom com duplo clique
@@ -27,8 +27,7 @@ export class MapaComponent implements OnInit {
 
           // Usar a camada OpenStreetMap para o mapa
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution:
-              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           }).addTo(this.map);
 
           // Criar um marcador em uma coordenada específica
@@ -44,6 +43,10 @@ export class MapaComponent implements OnInit {
 
           // Associar o popup com o marcador
           marker.bindPopup(popupContent);
+
+        } else {
+          console.error('Leaflet não foi carregado corretamente ou o método map não está disponível');
+        }
       }).catch(err => {
         console.error('Erro ao carregar o Leaflet', err);
       });
