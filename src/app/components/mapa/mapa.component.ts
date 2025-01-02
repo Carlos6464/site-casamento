@@ -17,6 +17,7 @@ export class MapaComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       // Carregar o Leaflet dinamicamente
       import('leaflet').then((L: any) => {
+        console.log('Leaflet carregado:', L); // Verifique se o L está sendo carregado corretamente
         if (L && typeof L.map === 'function') {
           // Criar o mapa e definir a posição inicial
           this.map = L.map("map", {
