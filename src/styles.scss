@@ -3,6 +3,10 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 
+html{
+  scroll-behavior: smooth;
+}
+
 html {
   @include mat.theme((
     color: (
@@ -13,6 +17,8 @@ html {
     typography: Roboto,
     density: 0,
   ));
+
+
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
@@ -28,10 +34,6 @@ html {
 }
 
 :root {
-
-    @include mat.progress-spinner-overrides((
-      active-indicator-color: #5A359C,
-    ));
     /* Cores principais */
     --primary-color: #5A359C;
     --secondary-color: #E8E2F0;
@@ -51,6 +53,11 @@ html {
     --gray-700: #495057;
     --gray-800: #343a40;
     --gray-900: #212529;
+
+    @include mat.progress-spinner-overrides((
+      active-indicator-color: #5A359C,
+    ));
+
   }
 
 

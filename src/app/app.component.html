@@ -23,13 +23,13 @@
       </button>
       <div *ngIf="menuOpen" class="overlay open" (click)="closeMenu()"></div>
 
-      <div *ngIf="menuOpen" class="side-menu open">
+      <div class="side-menu" [class.open]="menuOpen">
         <ul>
           <li><a href="#home" (click)="closeMenu()">Home</a></li>
           <li><a href="#casal" (click)="closeMenu()">O casal</a></li>
           <li><a href="#cerimonia" (click)="closeMenu()">Cerimônia</a></li>
           <li><a href="#presente" (click)="closeMenu()">Lista de presentes</a></li>
-          <li><a href="#recado"(click)="closeMenu()">Recados</a></li>>
+          <li><a href="#recado" (click)="closeMenu()">Recados</a></li>
         </ul>
       </div>
     </div>
@@ -52,6 +52,15 @@
       <app-recado></app-recado>
     </section>
   </div>
+
+  <button
+  id="scrollToTopBtn"
+  class="scroll-to-top"
+  [class.show]="isVisible"
+  (click)="scrollToTop()"
+>
+   ▲
+</button>
 </div>
 
 

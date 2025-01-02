@@ -19,27 +19,26 @@ export class AppComponent implements OnInit, AfterViewInit{
   isMobile: boolean = false;  // Controla se é dispositivo móvel
   menuOpen: boolean = false;  // Controla a abertura do menu hamburguer
   isLoaded: boolean = false;
-
-  ngOnInit(): void {
-
-  }
+  isVisible = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
+  ngOnInit(): void {}
+
+  // Detecta mudanças no tamanho da tela
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
+
   ngAfterViewInit(): void {
-    // Coloque a lógica para verificar se tudo foi carregado
-    console.log('Tudo foi carregado!');
     if (isPlatformBrowser(this.platformId)) {
       this.checkIfLoaded(); // Verifica o carregamento
       this.isLoaded = true
     }
   }
 
-    // Detecta mudanças no tamanho da tela
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.checkScreenSize();
-  }
+
 
   // Verifica se é um dispositivo móvel (largura da tela menor que 600px)
   checkScreenSize(): void {
@@ -67,11 +66,6 @@ export class AppComponent implements OnInit, AfterViewInit{
       const elementPosition = section.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition + yOffset;
 
-      console.log("elementPosition");
-      console.log(elementPosition);
-
-      console.log("offsetPosition");
-      console.log(offsetPosition);
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth',
@@ -79,6 +73,22 @@ export class AppComponent implements OnInit, AfterViewInit{
     } else {
       console.error(`Element with id "${sectionId}" not found.`);
     }
+  }
+
+
+
+  // Verifica o scroll da página
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    this.isVisible = scrollPosition > 100; // Aparece após rolar 100px
+  }
+   // Desliza suavemente para o topo
+   scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
 
