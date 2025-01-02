@@ -19,6 +19,7 @@ html {
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Satisfy&display=swap');
 
 
+
 *{
     margin: 0;
     padding: 0;
@@ -27,6 +28,10 @@ html {
 }
 
 :root {
+
+    @include mat.progress-spinner-overrides((
+      active-indicator-color: #5A359C,
+    ));
     /* Cores principais */
     --primary-color: #5A359C;
     --secondary-color: #E8E2F0;
@@ -35,7 +40,7 @@ html {
     --warning-color: #ffc107;
     --info-color: #17a2b8;
     --light-color: #F0ECF5;
-  
+
     /* Tons de cinza */
     --gray-100: #f8f9fa;
     --gray-200: #e9ecef;
@@ -48,7 +53,7 @@ html {
     --gray-900: #212529;
   }
 
-  
+
 
 
 

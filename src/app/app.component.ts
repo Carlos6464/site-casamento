@@ -1,4 +1,5 @@
-import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CasalComponent } from './casal/casal.component';
@@ -9,18 +10,30 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [HomeComponent, CasalComponent, CerimoniaComponent, PresenteComponent,RecadoComponent, CommonModule],
+  imports: [HomeComponent, CasalComponent, CerimoniaComponent, PresenteComponent,RecadoComponent, CommonModule,MatProgressSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit{
   title = 'site-casamento';
   isMobile: boolean = false;  // Controla se é dispositivo móvel
   menuOpen: boolean = false;  // Controla a abertura do menu hamburguer
+  isLoaded: boolean = false;
 
-    ngOnInit(): void {
+  ngOnInit(): void {
 
+  }
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngAfterViewInit(): void {
+    // Coloque a lógica para verificar se tudo foi carregado
+    console.log('Tudo foi carregado!');
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkIfLoaded(); // Verifica o carregamento
+      this.isLoaded = true
     }
+  }
 
     // Detecta mudanças no tamanho da tela
   @HostListener('window:resize', ['$event'])
@@ -65,6 +78,24 @@ export class AppComponent implements OnInit {
       });
     } else {
       console.error(`Element with id "${sectionId}" not found.`);
+    }
+  }
+
+
+  checkIfLoaded(): void {
+    // Aguarda até que todos os elementos estejam carregados
+    const homeSection = document.getElementById('home');
+    const casalSection = document.getElementById('casal');
+    const cerimoniaSection = document.getElementById('cerimonia');
+    const presenteSection = document.getElementById('presente');
+    const recadoSection = document.getElementById('recado');
+
+    // Se todos os elementos estiverem carregados, muda a variável `isLoaded` para true
+    if (homeSection && casalSection && cerimoniaSection && presenteSection && recadoSection) {
+      console.log('esta tudo certo');
+    } else {
+      // Se algum elemento não estiver carregado, pode definir um timeout para re-tentar
+      setTimeout(() => this.checkIfLoaded(), 500);
     }
   }
 }

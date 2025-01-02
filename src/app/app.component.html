@@ -1,50 +1,57 @@
-
-<div class="menu-container">
-  <nav class="desktop-menu" *ngIf="!isMobile">
-      <ul>
-        <li><a href="#home" (click)="scrollTo('home')">Home</a></li>
-        <li><a href="#casal" (click)="scrollTo('casal')">O casal</a></li>
-        <li><a href="#cerimonia" (click)="scrollTo('cerimonia')">Cerimônia</a></li>
-        <li><a href="#presente" (click)="scrollTo('presente')">Lista de presentes</a></li>
-        <li><a href="#recado" (click)="scrollTo('recado')">Recados</a></li>
-      </ul>
-  </nav>
-
-  <!-- Menu hamburguer para telas pequenas -->
-  <div class="hamburger-menu" *ngIf="isMobile">
-    <button class="hamburger-btn" *ngIf="!menuOpen" (click)="toggleMenu()">
-      &#9776;
-    </button>
-    <div *ngIf="menuOpen" class="overlay open" (click)="closeMenu()"></div>
-
-    <div *ngIf="menuOpen" class="side-menu open">
-      <ul>
-        <li><a href="#home" (click)="closeMenu()">Home</a></li>
-        <li><a href="#casal" (click)="closeMenu()">O casal</a></li>
-        <li><a href="#cerimonia" (click)="closeMenu()">Cerimônia</a></li>
-        <li><a href="#presente" (click)="closeMenu()">Lista de presentes</a></li>
-        <li><a href="#recado"(click)="closeMenu()">Recados</a></li>>
-      </ul>
-    </div>
-  </div>
+<div *ngIf="!isLoaded" class="loading-screen">
+  <!-- Seu spinner de carregamento (por exemplo, usando o Angular Material) -->
+  <mat-spinner size="15"></mat-spinner>
+  <p>Carregando...</p>
 </div>
 
-<div>
-  <section id="home">
-    <app-home></app-home>
-  </section>
-  <section id="casal">
-    <app-casal></app-casal>
-  </section>
-  <section id="cerimonia">
-    <app-cerimonia></app-cerimonia>
-  </section>
-  <section id="presente">
-    <app-presente></app-presente>
-  </section>
-  <section id="recado">
-    <app-recado></app-recado>
-  </section>
+<div *ngIf="isLoaded">
+  <div class="menu-container">
+    <nav class="desktop-menu" *ngIf="!isMobile">
+        <ul>
+          <li><a href="#home" (click)="scrollTo('home')">Home</a></li>
+          <li><a href="#casal" (click)="scrollTo('casal')">O casal</a></li>
+          <li><a href="#cerimonia" (click)="scrollTo('cerimonia')">Cerimônia</a></li>
+          <li><a href="#presente" (click)="scrollTo('presente')">Lista de presentes</a></li>
+          <li><a href="#recado" (click)="scrollTo('recado')">Recados</a></li>
+        </ul>
+    </nav>
+
+
+    <div class="hamburger-menu" *ngIf="isMobile">
+      <button class="hamburger-btn" *ngIf="!menuOpen" (click)="toggleMenu()">
+        &#9776;
+      </button>
+      <div *ngIf="menuOpen" class="overlay open" (click)="closeMenu()"></div>
+
+      <div *ngIf="menuOpen" class="side-menu open">
+        <ul>
+          <li><a href="#home" (click)="closeMenu()">Home</a></li>
+          <li><a href="#casal" (click)="closeMenu()">O casal</a></li>
+          <li><a href="#cerimonia" (click)="closeMenu()">Cerimônia</a></li>
+          <li><a href="#presente" (click)="closeMenu()">Lista de presentes</a></li>
+          <li><a href="#recado"(click)="closeMenu()">Recados</a></li>>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <section id="home">
+      <app-home></app-home>
+    </section>
+    <section id="casal">
+      <app-casal></app-casal>
+    </section>
+    <section id="cerimonia">
+      <app-cerimonia></app-cerimonia>
+    </section>
+    <section id="presente">
+      <app-presente></app-presente>
+    </section>
+    <section id="recado">
+      <app-recado></app-recado>
+    </section>
+  </div>
 </div>
 
 
