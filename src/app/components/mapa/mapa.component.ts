@@ -17,22 +17,27 @@ export class MapaComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       // Carregar o Leaflet dinamicamente
       import('leaflet').then((L: any) => {
-        console.log('Leaflet carregado:', L); // Verifique se o L está sendo carregado corretamente
-        if (L && typeof L.map === 'function') {
+        console.log('Leaflet carregado:', L);
+
+        // Garantir que L seja do tipo correto
+        const leaflet = L.default || L; // Caso seja importado como módulo, o objeto Leaflet pode estar em 'default'
+
+        // Verificar se o método map está disponível
+        if (leaflet && typeof leaflet.map === 'function') {
           // Criar o mapa e definir a posição inicial
-          this.map = L.map("map", {
+          this.map = leaflet.map("map", {
             zoomControl: false, // Remove os controles de zoom
             scrollWheelZoom: false, // Desativa o zoom com o scroll do mouse
             doubleClickZoom: false, // Desativa o zoom com duplo clique
           }).setView([-22.435247606044122, -44.04274307301314], 12);
 
           // Usar a camada OpenStreetMap para o mapa
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           }).addTo(this.map);
 
           // Criar um marcador em uma coordenada específica
-          const marker = L.marker([-22.435247606044122, -44.04274307301314]).addTo(this.map);
+          const marker = leaflet.marker([-22.435247606044122, -44.04274307301314]).addTo(this.map);
 
           // Informações que você deseja mostrar no popup
           const popupContent = `
@@ -44,7 +49,6 @@ export class MapaComponent implements OnInit {
 
           // Associar o popup com o marcador
           marker.bindPopup(popupContent);
-
         } else {
           console.error('Leaflet não foi carregado corretamente ou o método map não está disponível');
         }
