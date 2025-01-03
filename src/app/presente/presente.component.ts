@@ -86,6 +86,7 @@ export class PresenteComponent {
         message: 'Este é um exemplo de alerta usando Angular Material.',
         presente: dados  // Passando o objeto `dados` para o data
       },
+      disableClose: true  // Impede o fechamento do diálogo ao clicar fora ou pressionar ESC
     });
   }
 

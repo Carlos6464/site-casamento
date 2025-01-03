@@ -1,0 +1,81 @@
+
+.form-container {
+  // background-color: #e8dcf7;
+  padding: 20px;
+  border-radius: 8px;
+  width: 600px;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+
+}
+
+.confirmation-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #5a3c91;
+}
+
+.confirmation-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.confirmation-form input,
+.confirmation-form textarea,
+.confirmation-form button {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.confirmation-form input[type="radio"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.confirmation-form button {
+  background-color: #5a3c91;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.confirmation-form button:hover {
+  background-color: #482c74;
+}
+
+.confirmation-form textarea {
+  resize: none;
+  height: 80px;
+}
+
+
+.product-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.product-button:hover {
+  background-color: #684bb5;
+}
+
+
+
