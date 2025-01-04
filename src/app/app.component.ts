@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -10,14 +17,22 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [HomeComponent, CasalComponent, CerimoniaComponent, PresenteComponent,RecadoComponent, CommonModule,MatProgressSpinnerModule],
+  imports: [
+    HomeComponent,
+    CasalComponent,
+    CerimoniaComponent,
+    PresenteComponent,
+    RecadoComponent,
+    CommonModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'site-casamento';
-  isMobile: boolean = false;  // Controla se é dispositivo móvel
-  menuOpen: boolean = false;  // Controla a abertura do menu hamburguer
+  isMobile: boolean = false; // Controla se é dispositivo móvel
+  menuOpen: boolean = false; // Controla a abertura do menu hamburguer
   isLoaded: boolean = false;
   isVisible = false;
 
@@ -34,11 +49,9 @@ export class AppComponent implements OnInit, AfterViewInit{
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.checkIfLoaded(); // Verifica o carregamento
-      this.isLoaded = true
+      this.isLoaded = true;
     }
   }
-
-
 
   // Verifica se é um dispositivo móvel (largura da tela menor que 600px)
   checkScreenSize(): void {
@@ -55,15 +68,13 @@ export class AppComponent implements OnInit, AfterViewInit{
     this.menuOpen = false;
   }
 
-
   scrollTo(sectionId: string): void {
     const section = document.getElementById(sectionId);
 
-
-
     if (section) {
       const yOffset = -60; // Ajuste para deslocamento de 60px (altura do menu fixo)
-      const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+      const elementPosition =
+        section.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition + yOffset;
 
       window.scrollTo({
@@ -75,22 +86,19 @@ export class AppComponent implements OnInit, AfterViewInit{
     }
   }
 
-
-
   // Verifica o scroll da página
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     this.isVisible = scrollPosition > 100; // Aparece após rolar 100px
   }
-   // Desliza suavemente para o topo
-   scrollToTop() {
+  // Desliza suavemente para o topo
+  scrollToTop() {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
   }
-
 
   checkIfLoaded(): void {
     // Aguarda até que todos os elementos estejam carregados
@@ -101,7 +109,13 @@ export class AppComponent implements OnInit, AfterViewInit{
     const recadoSection = document.getElementById('recado');
 
     // Se todos os elementos estiverem carregados, muda a variável `isLoaded` para true
-    if (homeSection && casalSection && cerimoniaSection && presenteSection && recadoSection) {
+    if (
+      homeSection &&
+      casalSection &&
+      cerimoniaSection &&
+      presenteSection &&
+      recadoSection
+    ) {
       console.log('esta tudo certo');
     } else {
       // Se algum elemento não estiver carregado, pode definir um timeout para re-tentar
