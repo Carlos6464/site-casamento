@@ -77,5 +77,14 @@
   background-color: #684bb5;
 }
 
+.toast-container {
+  z-index: 9999 !important;  /* Garante que o toast aparece acima do modal */
+}
+
+.mat-dialog-container {
+  z-index: 1000 !important;  /* Ajuste conforme necessário */
+}
+
+
 
 

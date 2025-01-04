@@ -60,8 +60,6 @@ export class PresenteComponent implements OnInit {
   carregarDados() {
     this.httpService.get('presente').subscribe(
       (response: any) => {
-        console.log(response);
-
         this.presentes = response || [];
         this.presentes_ = [...this.presentes];
         this.presentes = this.presentes.sort((a, b) =>
@@ -89,13 +87,21 @@ export class PresenteComponent implements OnInit {
   }
 
   showAlert(dados: Presente): void {
-    this.dialog.open(ConfirmarComponent, {
+    let dialogRef = this.dialog.open(ConfirmarComponent, {
       data: {
         title: 'Alerta',
         message: 'Este é um exemplo de alerta usando Angular Material.',
         presente: dados,
       },
       disableClose: true,
+    });
+
+    // Detectando quando o modal foi fechado
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Modal fechado!', result); // `result` contém os dados enviados ao fechar o modal
+      if (result && result == 'sucesso') {
+        this.carregarDados();
+      }
     });
   }
 
