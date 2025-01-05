@@ -64,17 +64,6 @@
   outline: none;
 }
 
-.confirmation-form input[type="radio"] {
-    width: auto;
-    margin-right: 5px;
-}
-
-.radio-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
 .confirmation-form button {
     background-color: #5a3c91;
     color: #fff;
@@ -88,7 +77,6 @@
 }
 
 .confirmation-form textarea {
-    resize: none;
     height: 80px;
 }
 

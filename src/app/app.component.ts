@@ -14,6 +14,7 @@ import { CerimoniaComponent } from './cerimonia/cerimonia.component';
 import { PresenteComponent } from './presente/presente.component';
 import { RecadoComponent } from './recado/recado.component';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -36,9 +37,20 @@ export class AppComponent implements OnInit, AfterViewInit {
   isLoaded: boolean = false;
   isVisible = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  activeMenu: any = '';
 
-  ngOnInit(): void {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    // Capturando o fragmento da URL
+    this.route.fragment.subscribe((fragment) => {
+      this.activeMenu = fragment;
+      console.log('Fragmento:', this.activeMenu); // Exemplo: "recado"
+    });
+  }
 
   // Detecta mudanças no tamanho da tela
   @HostListener('window:resize', ['$event'])
@@ -81,6 +93,8 @@ export class AppComponent implements OnInit, AfterViewInit {
         top: offsetPosition,
         behavior: 'smooth',
       });
+      this.activeMenu = sectionId;
+      console.log(this.activeMenu);
     } else {
       console.error(`Element with id "${sectionId}" not found.`);
     }

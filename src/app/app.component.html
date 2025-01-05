@@ -8,11 +8,11 @@
   <div class="menu-container">
     <nav class="desktop-menu" *ngIf="!isMobile">
         <ul>
-          <li><a href="#home" (click)="scrollTo('home')">Home</a></li>
-          <li><a href="#casal" (click)="scrollTo('casal')">O casal</a></li>
-          <li><a href="#cerimonia" (click)="scrollTo('cerimonia')">Cerimônia</a></li>
-          <li><a href="#presente" (click)="scrollTo('presente')">Lista de presentes</a></li>
-          <li><a href="#recado" (click)="scrollTo('recado')">Recados</a></li>
+          <li><a href="#home" (click)="scrollTo('home')"  [ngStyle]="activeMenu === 'home' ? {'text-decoration': 'underline'} : {}" >Home</a></li>
+          <li><a href="#casal" (click)="scrollTo('casal')"   [ngStyle]="activeMenu === 'casal' ? {'text-decoration': 'underline'} : {}"  >O casal</a></li>
+          <li><a href="#cerimonia" (click)="scrollTo('cerimonia')"  [ngStyle]="activeMenu === 'cerimonia' ? {'text-decoration': 'underline'} : {}" >Cerimônia</a></li>
+          <li><a href="#presente" (click)="scrollTo('presente')" [ngStyle]="activeMenu === 'presente' ? {'text-decoration': 'underline'} : {}" >Lista de presentes</a></li>
+          <li><a href="#recado" (click)="scrollTo('recado')"  [ngStyle]="activeMenu === 'recado' ? {'text-decoration': 'underline'} : {}" >Recados</a></li>
         </ul>
     </nav>
 
@@ -25,11 +25,11 @@
 
       <div class="side-menu" [class.open]="menuOpen">
         <ul>
-          <li><a href="#home" (click)="closeMenu()">Home</a></li>
-          <li><a href="#casal" (click)="closeMenu()">O casal</a></li>
-          <li><a href="#cerimonia" (click)="closeMenu()">Cerimônia</a></li>
-          <li><a href="#presente" (click)="closeMenu()">Lista de presentes</a></li>
-          <li><a href="#recado" (click)="closeMenu()">Recados</a></li>
+          <li><a href="#home" (click)="closeMenu()" [ngStyle]="activeMenu === 'home' ? {'background-color': '#7f56c9'} : {}">Home</a></li>
+          <li><a href="#casal" (click)="closeMenu()"  [ngStyle]="activeMenu === 'casal' ? {'background-color': '#7f56c9'} : {}">O casal</a></li>
+          <li><a href="#cerimonia" (click)="closeMenu()"  [ngStyle]="activeMenu === 'cerimonia' ? {'background-color': '#7f56c9'} : {}">Cerimônia</a></li>
+          <li><a href="#presente" (click)="closeMenu()"  [ngStyle]="activeMenu === 'presente' ? {'background-color': '#7f56c9'} : {}">Lista de presentes</a></li>
+          <li><a href="#recado" (click)="closeMenu()"  [ngStyle]="activeMenu === 'recado' ? {'background-color': '#7f56c9'} : {}">Recados</a></li>
         </ul>
       </div>
     </div>

@@ -14,7 +14,7 @@
                 <input type="email" id="email" name="email" [(ngModel)]="recado.email"  placeholder="Digite seu email" required>
 
                 <label for="recado">Recado:</label>
-                <textarea id="observacao" name="recado" [(ngModel)]="recado.recado"  placeholder="Digite seu recado com no maximo 200 caracteres"></textarea>
+                <textarea id="observacao" name="recado" [(ngModel)]="recado.recado"  placeholder="Digite seu recado"></textarea>
 
                 <button type="button" *ngIf="!isloaed" (click)="enviar()">Enviar recado</button>
 
