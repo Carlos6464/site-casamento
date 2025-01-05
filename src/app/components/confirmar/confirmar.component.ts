@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from '../../http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 interface User {
   nome_user: string;
@@ -22,6 +23,7 @@ interface User {
     MatIconModule,
     FormsModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './confirmar.component.html',
   styleUrl: './confirmar.component.scss',
@@ -32,6 +34,8 @@ export class ConfirmarComponent implements OnInit {
     nome_user: '',
     email_user: '',
   };
+
+  isloaed: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -49,6 +53,7 @@ export class ConfirmarComponent implements OnInit {
   }
 
   async confirmar() {
+    this.isloaed = true;
     if (
       this.user.nome_user &&
       this.user.nome_user != '' &&
@@ -59,15 +64,17 @@ export class ConfirmarComponent implements OnInit {
         .patch(`presente/${this.data.presente.id}`, this.user)
         .subscribe(
           (response: any) => {
-            this.snackBar.open('Presente selecionado com suceso!', 'Fechar', {
+            this.isloaed = false;
+            this.snackBar.open('Presente selecionado com suceso!', 'X', {
               duration: 3000,
-              horizontalPosition: 'right',
+              horizontalPosition: 'left',
               verticalPosition: 'bottom',
             });
             this.dialogRef.close('sucesso');
           },
           (error) => {
-            this.snackBar.open('Error ao selecionar presente!', 'Fechar', {
+            this.isloaed = false;
+            this.snackBar.open('Error ao selecionar presente!', 'X', {
               duration: 3000,
               horizontalPosition: 'right',
               verticalPosition: 'bottom',
@@ -76,9 +83,10 @@ export class ConfirmarComponent implements OnInit {
           }
         );
     } else {
+      this.isloaed = false;
       this.snackBar.open(
         'Por favor, insira seu nome e e-mail para confirmar a ação.',
-        'Fechar',
+        'X',
         {
           duration: 3000,
           horizontalPosition: 'right',
@@ -86,5 +94,15 @@ export class ConfirmarComponent implements OnInit {
         }
       );
     }
+  }
+
+  capitalizarTexto(texto: string) {
+    return texto
+      .trim() // Remove espaços no início e no fim
+      .replace(/\s+/g, ' ') // Substitui múltiplos espaços por um único espaço
+      .toLowerCase() // Converte todo o texto para letras minúsculas
+      .split(' ') // Divide o texto em palavras
+      .map((palavra) => palavra.charAt(0).toUpperCase() + palavra.slice(1)) // Capitaliza a primeira letra de cada palavra
+      .join(' '); // Junta as palavras de volta
   }
 }

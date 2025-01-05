@@ -136,10 +136,30 @@ export class PresenteComponent implements OnInit {
     this.updatePaginatedItems(0, this.pageSize);
   }
 
+  capitalizarTexto(texto: string) {
+    return texto
+      .trim() // Remove espaços no início e no fim
+      .replace(/\s+/g, ' ') // Substitui múltiplos espaços por um único espaço
+      .toLowerCase() // Converte todo o texto para letras minúsculas
+      .split(' ') // Divide o texto em palavras
+      .map((palavra) => palavra.charAt(0).toUpperCase() + palavra.slice(1)) // Capitaliza a primeira letra de cada palavra
+      .join(' '); // Junta as palavras de volta
+  }
+
   truncateText(text: string, maxLength: number): string {
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+    let textAjustado = this.capitalizarTexto(text);
+
+    if (textAjustado.length > maxLength) {
+      return textAjustado.substring(0, maxLength) + '...';
     }
-    return text;
+
+    return textAjustado;
+  }
+
+  formatarParaReais(valor: any) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(valor);
   }
 }

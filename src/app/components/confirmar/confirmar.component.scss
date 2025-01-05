@@ -77,14 +77,13 @@
   background-color: #684bb5;
 }
 
-.toast-container {
-  z-index: 9999 !important;  /* Garante que o toast aparece acima do modal */
+input:focus{
+  outline: none;
 }
 
-.mat-dialog-container {
-  z-index: 1000 !important;  /* Ajuste conforme necessário */
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+  background-color: var(--primary-color);
 }
-
 
 
 

@@ -115,18 +115,20 @@
 }
 
 .side-menu li {
-  padding: 15px 10px;
   border-bottom: 1px solid #7e42c9b3;
+  padding: 10px 10px 10px 0;
 }
 
 .side-menu a {
   color: var(--light-color);
   text-decoration: none;
   display: block;
+  padding: 5px;
 }
 
 .side-menu a:hover {
-  background-color: #444;
+  background-color: #7f42c9;
+  color: var(--light-color);
 }
 
 
@@ -190,6 +192,10 @@
 .scroll-to-top.show {
   display: block;
   opacity: 1;
+}
+
+a:active {
+  color: red; /* Cor do link quando clicado */
 }
 
 

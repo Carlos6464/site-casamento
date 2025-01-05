@@ -3,7 +3,7 @@
     justify-content: space-between;
     padding: 15px 24px 15px 33px;
     margin-top: 5px;" >
-  <h4 >{{data.presente.nome}}</h4>
+  <h4 >{{capitalizarTexto(data.presente.nome)}}</h4>
   <button mat-icon-button (click)="closeDialog()" aria-label="Fechar">
     <mat-icon>close</mat-icon> <!-- Ícone de fechar -->
   </button>
@@ -12,7 +12,7 @@
 <mat-dialog-content style="padding: 0 24px;">
   <p style="font-size: 15px;  color: var(--primary-color); line-height: normal; padding: 10px;  margin: 0"><strong>Atenção!</strong></p>
   <p style="font-size: 12px; color: var(--primary-color);  line-height: normal; padding: 5px 10px;">Aqui não é o momento de comprar o presente do casamento. O que você vai fazer é confirmar qual presente escolher para o casal. Se decidir comprar, é só clicar no link abaixo, que te leva direto a uma sugestão de site para a compra do presente.</p>
-  <p style="font-size: 12px;  color: var(--primary-color);  line-height: normal;  padding: 5px 10px; margin: 0"> <a [href]="data.presente.link" target="_blank">Clique aqui para acessar o site e comprar o presente!</a></p>
+  <p style="font-size: 12px;  color: var(--primary-color);  line-height: normal;  padding: 5px 10px; margin: 0"> <a style="color: var(--primary-color);" [href]="data.presente.link" target="_blank">Clique aqui para acessar o site e comprar o presente!</a></p>
   <p style="font-size: 12px; color: var(--primary-color); line-height: normal; padding: 5px 10px; margin: 0">Dá uma olhada nas opções e se quiser, já pode garantir o presente por lá!</p>
 
   <p style="font-size: 12px; color: var(--primary-color); line-height: normal;  padding: 5px 10px; margin: 0">Por favor, digite seu nome e e-mail abaixo para que possamos notificar o casal sobre quem irá comprar o presente:</p>
@@ -27,5 +27,9 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button class="product-button" (click)="confirmar()">Confirmar</button>
+  <button class="product-button" *ngIf="!isloaed" (click)="confirmar()">Confirmar</button>
+  <button class="btn product-button" *ngIf="isloaed" type="button"(click)="confirmar()" disabled>
+    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+    <span role="status"> Salvando...</span>
+  </button>
 </mat-dialog-actions>

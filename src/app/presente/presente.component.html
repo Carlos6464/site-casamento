@@ -32,7 +32,7 @@
             <div *ngFor="let presente of paginatedItems; let i = index" class="product-card" style="align-items: center; height: 300px;">
                 <img [src]="'assets/imagens_produtos/imagem_' + presente.id + '.png'"  alt="Produto" style="width: 80%;height: 134px; object-fit: contain;">
                 <p class="product-name" >{{truncateText(presente.nome, 30)}}</p>
-                <p class="product-price">{{ presente.preco| currency:'BRL':'symbol':'1.2-2' }}</p>
+                <p class="product-price">{{formatarParaReais(presente.preco) }}</p>
                 <button class="product-button" (click)="showAlert(presente)">Presentear</button>
             </div>
         </div>

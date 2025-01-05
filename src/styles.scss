@@ -26,6 +26,7 @@ html {
 
 
 
+
 *{
     margin: 0;
     padding: 0;
@@ -56,6 +57,12 @@ html {
 
     @include mat.progress-spinner-overrides((
       active-indicator-color: #5A359C,
+    ));
+
+    @include mat.snack-bar-overrides((
+      container-color: var(--primary-color),
+      supporting-text-color: var(--secondary-color),
+      button-color: var(--secondary-color)
     ));
 
   }
