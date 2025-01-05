@@ -95,7 +95,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         behavior: 'smooth',
       });
       this.activeMenu = sectionId;
-      console.log(this.activeMenu);
+      console.log(elementPosition);
     } else {
       console.error(`Element with id "${sectionId}" not found.`);
     }
@@ -115,6 +115,49 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
+  @HostListener('window:wheel', ['$event'])
+  onWheel(event: WheelEvent): void {
+    // Pegue os elementos pelas IDs
+    const homeSection = document.getElementById('home');
+    const casalSection = document.getElementById('casal');
+    const cerimoniaSection = document.getElementById('cerimonia');
+    const presenteSection = document.getElementById('presente');
+    const recadoSection = document.getElementById('recado');
+
+    // Verifique se as seções existem
+    if (
+      homeSection &&
+      casalSection &&
+      cerimoniaSection &&
+      presenteSection &&
+      recadoSection
+    ) {
+      // Pegue a posição de cada seção no viewport
+      const sections = [
+        { id: 'home', rect: homeSection.getBoundingClientRect() },
+        { id: 'casal', rect: casalSection.getBoundingClientRect() },
+        { id: 'cerimonia', rect: cerimoniaSection.getBoundingClientRect() },
+        { id: 'presente', rect: presenteSection.getBoundingClientRect() },
+        { id: 'recado', rect: recadoSection.getBoundingClientRect() },
+      ];
+
+      // Defina a lógica para identificar qual seção está mais próxima do topo
+      const visibleSection = sections.find(
+        (section) => section.rect.top <= 0 && section.rect.bottom >= 0
+      );
+
+      if (visibleSection) {
+        this.activeMenu = visibleSection.id;
+      }
+    }
+
+    // Detecte a direção da rolagem
+    if (event.deltaY > 0) {
+      console.log('Rolou para baixo');
+    } else {
+      console.log('Rolou para cima');
+    }
+  }
   checkIfLoaded(): void {
     // Aguarda até que todos os elementos estejam carregados
     const homeSection = document.getElementById('home');
