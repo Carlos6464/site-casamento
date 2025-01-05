@@ -3,27 +3,32 @@
     <div class="content-recado">
 
         <p class="title">Recados</p>
-          
-      
+
+
         <div class="form-container">
             <form class="confirmation-form">
                 <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
-    
+                <input type="text" id="nome" name="nome" [(ngModel)]="recado.nome"  placeholder="Digite seu nome" required>
+
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
-    
+                <input type="email" id="email" name="email" [(ngModel)]="recado.email"  placeholder="Digite seu email" required>
+
                 <label for="recado">Recado:</label>
-                <textarea id="observacao" name="recado" placeholder="Digite seu recado"></textarea>
-    
-                <button type="button">Enviar recado</button>
+                <textarea id="observacao" name="recado" [(ngModel)]="recado.recado"  placeholder="Digite seu recado com no maximo 200 caracteres"></textarea>
+
+                <button type="button" *ngIf="!isloaed" (click)="enviar()">Enviar recado</button>
+
+                <button class="btn button" *ngIf="isloaed" type="button"(click)="enviar()" disabled>
+                  <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                  <span role="status"> Enviando...</span>
+                </button>
             </form>
         </div>
-       
-       
-    
-      
+
+
+
+
     </div>
-    
+
 </div>
 

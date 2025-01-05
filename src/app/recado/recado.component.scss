@@ -59,6 +59,11 @@
     font-size: 14px;
 }
 
+.confirmation-form input:focus,
+.confirmation-form textarea:focus{
+  outline: none;
+}
+
 .confirmation-form input[type="radio"] {
     width: auto;
     margin-right: 5px;
