@@ -45,11 +45,14 @@ export class PresenteComponent implements OnInit {
   presentes_: Presente[] = [];
   paginatedItems: Presente[] = [];
 
+  presentesComprados: Presente[] = [];
   pageSize = 10;
   length = 0; // Inicializa como zero
 
   filtro: string = '';
+  filtroComprado: string = '';
   ordenar: string = 'a-z';
+  isloaed: boolean = false;
 
   constructor(private dialog: MatDialog) {}
 
@@ -114,6 +117,21 @@ export class PresenteComponent implements OnInit {
     }
     this.length = this.presentes.length; // Atualiza o total de itens
     this.updatePaginatedItems(0, this.pageSize);
+  }
+
+  filtroPresenteComprado() {
+    this.isloaed = true;
+    this.httpService
+      .get(`presente/confirm?search=${this.filtroComprado}`)
+      .subscribe(
+        (response: any) => {
+          this.isloaed = false;
+          this.presentesComprados = response || [];
+        },
+        (error) => {
+          this.isloaed = false;
+        }
+      );
   }
 
   ordenarPresentes() {

@@ -64,4 +64,32 @@
             aria-label="Select page">
         </mat-paginator>
 
+
+        <p style="font-weight: 500; color: var(--primary-color); text-align: left;  margin: 0; padding: 20px 20px 0 0;"><strong>Você já selecionou um presente!</strong><br>
+          Para acessar os links de compra e outras informações sobre os presentes que você escolheu, basta utilizar o campo abaixo para realizar a pesquisa. Você pode buscar pelo nome, e-mail ou CPF, para encontrar o presente desejado.</p>
+        <div class="pesquisa-filtro" >
+          <!-- Campo de Busca -->
+           <div class="search" style="display: flex; align-items: center; gap: 10px;">
+             <div class="search-bar">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#d0cfd4">
+                 <path d="M10 2a8 8 0 0 1 6.32 12.9l4.39 4.4a1 1 0 0 1-1.42 1.4l-4.4-4.38A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"></path>
+               </svg>
+               <input type="text" placeholder="Nome | E-mail | CPF" [(ngModel)]="filtroComprado" >
+             </div>
+             <button class="product-button"  *ngIf="!isloaed" (click)="filtroPresenteComprado()">Buscar</button>
+             <button style="display: flex; gap: 8px;" class="btn product-button" *ngIf="isloaed" type="button" disabled>
+              <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+              <span role="status"> Buscando...</span>
+            </button>
+           </div>
+        </div>
+        <div class="lista-presentes-cards">
+          <div *ngFor="let presente of presentesComprados; let i = index" class="product-card" style="align-items: center; height: 300px;">
+              <img [src]="'assets/imagens_produtos/imagem_' + presente.id + '.png'"  alt="Produto" style="width: 80%;height: 134px; object-fit: contain;">
+              <p class="product-name" >{{truncateText(presente.nome, 30)}}</p>
+              <p class="product-price">{{formatarParaReais(presente.preco) }}</p>
+              <button class="product-button"><a style="color: var(--secondary-color); text-decoration: none; font-size: 15px; font-weight: bold;" [href]="presente.link" target="_blank">Acessar Produto</a></button>
+          </div>
+      </div>
+
 </div>
