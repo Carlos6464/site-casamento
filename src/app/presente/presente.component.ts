@@ -69,6 +69,9 @@ export class PresenteComponent implements OnInit {
           a.nome.localeCompare(b.nome)
         );
 
+        console.log('presentes');
+        console.log(this.presentes);
+
         this.length = this.presentes.length; // Atualiza o total de itens
         this.updatePaginatedItems(0, this.pageSize);
       },
@@ -92,8 +95,6 @@ export class PresenteComponent implements OnInit {
   showAlert(dados: Presente): void {
     let dialogRef = this.dialog.open(ConfirmarComponent, {
       data: {
-        title: 'Alerta',
-        message: 'Este é um exemplo de alerta usando Angular Material.',
         presente: dados,
       },
       disableClose: true,
