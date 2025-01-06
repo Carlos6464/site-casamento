@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 interface User {
   nome_user: string;
   email_user: string;
+  cpf_user: string;
 }
 @Component({
   selector: 'app-confirmar',
@@ -30,9 +31,11 @@ interface User {
 })
 export class ConfirmarComponent implements OnInit {
   private httpService = inject(HttpService);
+
   user: User = {
     nome_user: '',
     email_user: '',
+    cpf_user: '',
   };
 
   isloaed: boolean = false;
@@ -58,8 +61,12 @@ export class ConfirmarComponent implements OnInit {
       this.user.nome_user &&
       this.user.nome_user != '' &&
       this.user.email_user &&
-      this.user.email_user != ''
+      this.user.email_user != '' &&
+      this.user.cpf_user &&
+      this.user.cpf_user != ''
     ) {
+      this.user.cpf_user = this.user.cpf_user.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
       this.httpService
         .patch(`presente/${this.data.presente.id}`, this.user)
         .subscribe(
@@ -70,6 +77,7 @@ export class ConfirmarComponent implements OnInit {
               horizontalPosition: 'left',
               verticalPosition: 'bottom',
             });
+            this.redirectToLink();
             this.dialogRef.close('sucesso');
           },
           (error) => {
@@ -85,7 +93,7 @@ export class ConfirmarComponent implements OnInit {
     } else {
       this.isloaed = false;
       this.snackBar.open(
-        'Por favor, insira seu nome e e-mail para confirmar a ação.',
+        'Por favor, insira seu nome, e-mail e Cpf para confirmar a ação.',
         'X',
         {
           duration: 3000,
@@ -104,5 +112,40 @@ export class ConfirmarComponent implements OnInit {
       .split(' ') // Divide o texto em palavras
       .map((palavra) => palavra.charAt(0).toUpperCase() + palavra.slice(1)) // Capitaliza a primeira letra de cada palavra
       .join(' '); // Junta as palavras de volta
+  }
+
+  // Método para aplicar a máscara no CPF e limitar o número de dígitos
+  @HostListener('input', ['$event'])
+  onInputChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    // Verifica se o campo é o CPF
+    if (input.id === 'cpf') {
+      let value = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+      // Limita a quantidade de caracteres a 11 (CPF com 11 dígitos)
+      if (value.length > 11) {
+        value = value.slice(0, 11);
+      }
+
+      // Aplica a máscara conforme a quantidade de caracteres
+      if (value.length <= 3) {
+        input.value = value;
+      } else if (value.length <= 6) {
+        input.value = value.replace(/(\d{3})(\d{1,})/, '$1.$2');
+      } else if (value.length <= 9) {
+        input.value = value.replace(/(\d{3})(\d{3})(\d{1,})/, '$1.$2.$3');
+      } else {
+        input.value = value.replace(
+          /(\d{3})(\d{3})(\d{3})(\d{1,})/,
+          '$1.$2.$3-$4'
+        );
+      }
+    }
+  }
+
+  redirectToLink(): void {
+    const url = this.data.presente.link;
+    window.open(url, '_blank'); // Abre o link em uma nova aba
   }
 }

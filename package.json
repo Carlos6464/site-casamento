@@ -32,8 +32,10 @@
     "express": "^4.18.2",
     "leaflet": "^1.9.4",
     "ng-leaflet-universal": "^15.2.8",
+    "ngx-mask": "^19.0.6",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
+    "text-mask-core": "^5.1.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

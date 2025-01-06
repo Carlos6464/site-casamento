@@ -59,12 +59,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.checkScreenSize();
   }
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.checkIfLoaded(); // Verifica o carregamento
-      this.isLoaded = true;
-    }
-  }
+  ngAfterViewInit(): void {}
 
   // Verifica se é um dispositivo móvel (largura da tela menor que 600px)
   checkScreenSize(): void {

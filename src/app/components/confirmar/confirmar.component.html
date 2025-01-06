@@ -15,11 +15,16 @@
   <p style="font-size: 12px;  color: var(--primary-color);  line-height: normal;  padding: 5px 10px; margin: 0"> <a style="color: var(--primary-color);" [href]="data.presente.link" target="_blank">Clique aqui para acessar o site e comprar o presente!</a></p>
   <p style="font-size: 12px; color: var(--primary-color); line-height: normal; padding: 5px 10px; margin: 0">Dá uma olhada nas opções e se quiser, já pode garantir o presente por lá!</p>
 
+
+  <p style="font-size: 12px; color: var(--primary-color); line-height: normal; padding: 5px 10px; margin: 0"><strong>Endereço de Entrega: </strong> Rua Macaé, 123 | Siderlândia, Volta Redonda | CEP: 27273-170</p>
   <p style="font-size: 12px; color: var(--primary-color); line-height: normal;  padding: 5px 10px; margin: 0">Por favor, digite seu nome e e-mail abaixo para que possamos notificar o casal sobre quem irá comprar o presente:</p>
 
   <form class="confirmation-form" style="padding: 10px 10px;">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" name="nome" [(ngModel)]="user.nome_user" placeholder="Digite seu nome" required>
+
+      <label for="nome">Cpf:</label>
+      <input matInput  type="text" id="cpf" name="nome" [(ngModel)]="user.cpf_user" placeholder="000.000.000-00" required>
 
       <label for="email">E-mail:</label>
       <input type="email" id="email" name="email" [(ngModel)]="user.email_user" placeholder="Digite seu email" required>
