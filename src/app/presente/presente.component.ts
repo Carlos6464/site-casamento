@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,7 +38,7 @@ interface Presente {
   templateUrl: './presente.component.html',
   styleUrl: './presente.component.scss',
 })
-export class PresenteComponent implements OnInit {
+export class PresenteComponent implements OnInit, AfterViewInit {
   private httpService = inject(HttpService);
 
   presentes: Presente[] = [];
@@ -56,7 +56,10 @@ export class PresenteComponent implements OnInit {
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit(): void {
+    this.presentes = [];
     this.carregarDados();
   }
 
@@ -70,9 +73,10 @@ export class PresenteComponent implements OnInit {
         );
 
         console.log('presentes');
-        console.log(this.presentes);
 
         this.length = this.presentes.length; // Atualiza o total de itens
+
+        console.log(this.presentes);
         this.updatePaginatedItems(0, this.pageSize);
       },
       (error) => {

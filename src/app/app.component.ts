@@ -44,7 +44,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
     // Capturando o fragmento da URL
     this.route.fragment.subscribe((fragment) => {
       this.activeMenu = fragment;
@@ -52,8 +54,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       console.log('Fragmento:', this.activeMenu); // Exemplo: "recado"
     });
   }
-
-  ngAfterViewInit(): void {}
 
   // Alterna o menu hamburguer
   toggleMenu(): void {

@@ -86,7 +86,7 @@ export class ConfirmarComponent implements OnInit {
               horizontalPosition: 'right',
               verticalPosition: 'bottom',
             });
-            console.error('Erro ao carregar dados', error);
+            console.error('Erro ao carregar dados', error.error);
           }
         );
     } else {
