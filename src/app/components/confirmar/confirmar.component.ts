@@ -77,7 +77,6 @@ export class ConfirmarComponent implements OnInit {
               horizontalPosition: 'left',
               verticalPosition: 'bottom',
             });
-            this.redirectToLink();
             this.dialogRef.close('sucesso');
           },
           (error: any) => {
@@ -142,10 +141,5 @@ export class ConfirmarComponent implements OnInit {
         );
       }
     }
-  }
-
-  redirectToLink(): void {
-    const url = this.data.presente.link;
-    window.open(url, '_blank'); // Abre o link em uma nova aba
   }
 }
