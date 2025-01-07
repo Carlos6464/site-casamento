@@ -78,7 +78,7 @@
   top: 10px;
   width: 100%;
   background-color: transparent;
-  display: flex;
+  display: none;
   justify-content: flex-end;
   z-index: 9000;
 }
@@ -138,6 +138,9 @@
     display: none; /* Esconde o menu horizontal em telas pequenas */
   }
 
+  .hamburger-menu{
+    display: flex;
+  }
   .hamburger-btn {
     font-size: 40px;
   }

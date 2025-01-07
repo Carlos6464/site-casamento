@@ -105,6 +105,7 @@ export class PresenteComponent implements OnInit {
       console.log('Modal fechado!', result); // `result` contém os dados enviados ao fechar o modal
       if (result && result == 'sucesso') {
         this.carregarDados();
+        this.redirectToLink(dados.link);
       }
     });
   }
@@ -180,5 +181,10 @@ export class PresenteComponent implements OnInit {
       style: 'currency',
       currency: 'BRL',
     }).format(valor);
+  }
+
+  redirectToLink(link: any): void {
+    const url = link;
+    window.open(url, '_blank'); // Abre o link em uma nova aba
   }
 }

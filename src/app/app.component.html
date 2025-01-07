@@ -6,7 +6,7 @@
 
 <div >
   <div class="menu-container">
-    <nav class="desktop-menu" *ngIf="!isMobile">
+    <nav class="desktop-menu">
         <ul>
           <li><a href="#home" (click)="scrollTo('home')"  [ngStyle]="activeMenu === 'home' ? {'text-decoration': 'underline'} : {}" >Home</a></li>
           <li><a href="#casal" (click)="scrollTo('casal')"   [ngStyle]="activeMenu === 'casal' ? {'text-decoration': 'underline'} : {}"  >O casal</a></li>
@@ -17,7 +17,7 @@
     </nav>
 
 
-    <div class="hamburger-menu" *ngIf="isMobile">
+    <div class="hamburger-menu" >
       <button class="hamburger-btn" *ngIf="!menuOpen" (click)="toggleMenu()">
         &#9776;
       </button>

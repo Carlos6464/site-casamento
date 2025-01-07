@@ -53,18 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Detecta mudanças no tamanho da tela
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.checkScreenSize();
-  }
-
   ngAfterViewInit(): void {}
-
-  // Verifica se é um dispositivo móvel (largura da tela menor que 600px)
-  checkScreenSize(): void {
-    this.isMobile = window.innerWidth <= 600;
-  }
 
   // Alterna o menu hamburguer
   toggleMenu(): void {
@@ -151,28 +140,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       console.log('Rolou para baixo');
     } else {
       console.log('Rolou para cima');
-    }
-  }
-  checkIfLoaded(): void {
-    // Aguarda até que todos os elementos estejam carregados
-    const homeSection = document.getElementById('home');
-    const casalSection = document.getElementById('casal');
-    const cerimoniaSection = document.getElementById('cerimonia');
-    const presenteSection = document.getElementById('presente');
-    const recadoSection = document.getElementById('recado');
-
-    // Se todos os elementos estiverem carregados, muda a variável `isLoaded` para true
-    if (
-      homeSection &&
-      casalSection &&
-      cerimoniaSection &&
-      presenteSection &&
-      recadoSection
-    ) {
-      console.log('esta tudo certo');
-    } else {
-      // Se algum elemento não estiver carregado, pode definir um timeout para re-tentar
-      setTimeout(() => this.checkIfLoaded(), 500);
     }
   }
 }
