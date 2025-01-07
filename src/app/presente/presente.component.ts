@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,7 +41,8 @@ interface Presente {
 export class PresenteComponent implements OnInit, AfterViewInit {
   private httpService = inject(HttpService);
 
-  presentes: Presente[] = [];
+  @Input() presentes: Presente[] = [];
+
   presentes_: Presente[] = [];
   paginatedItems: Presente[] = [];
 
@@ -57,52 +58,23 @@ export class PresenteComponent implements OnInit, AfterViewInit {
   constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.httpService.get('presente').subscribe(
-      (response: any) => {
-        this.presentes = response || [];
-        this.presentes_ = [...this.presentes];
-        this.presentes = this.presentes.sort((a, b) =>
-          a.nome.localeCompare(b.nome)
-        );
-
-        console.log('presentes');
-
-        this.length = this.presentes.length; // Atualiza o total de itens
-
-        console.log(this.presentes);
-        this.updatePaginatedItems(0, this.pageSize);
-      },
-      (error) => {
-        console.error('Erro ao carregar dados', error);
-      }
-    );
+    this.carregarDados();
   }
 
-  ngAfterViewInit(): void {
-    this.presentes = [];
-    // this.carregarDados();
-  }
+  ngAfterViewInit(): void {}
 
   carregarDados() {
-    this.httpService.get('presente').subscribe(
-      (response: any) => {
-        this.presentes = response || [];
-        this.presentes_ = [...this.presentes];
-        this.presentes = this.presentes.sort((a, b) =>
-          a.nome.localeCompare(b.nome)
-        );
-
-        console.log('presentes');
-
-        this.length = this.presentes.length; // Atualiza o total de itens
-
-        console.log(this.presentes);
-        this.updatePaginatedItems(0, this.pageSize);
-      },
-      (error) => {
-        console.error('Erro ao carregar dados', error);
-      }
+    this.presentes_ = [...this.presentes];
+    this.presentes = this.presentes.sort((a, b) =>
+      a.nome.localeCompare(b.nome)
     );
+
+    console.log('presentes');
+
+    this.length = this.presentes.length; // Atualiza o total de itens
+
+    console.log(this.presentes);
+    this.updatePaginatedItems(0, this.pageSize);
   }
 
   onPageChange(event: PageEvent): void {
@@ -128,6 +100,9 @@ export class PresenteComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Modal fechado!', result); // `result` contém os dados enviados ao fechar o modal
       if (result && result == 'sucesso') {
+        this.presentes = this.presentes.filter(
+          (presente: Presente) => presente.id != dados.id
+        );
         this.carregarDados();
         this.redirectToLink(dados.link);
       }

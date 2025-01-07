@@ -15,6 +15,21 @@ import { PresenteComponent } from './presente/presente.component';
 import { RecadoComponent } from './recado/recado.component';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+import { HttpService } from './http.service';
+
+interface Presente {
+  id: number;
+  nome: string;
+  link: string;
+  status: boolean;
+  nome_user: string | null;
+  email_user: string | null;
+  preco: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -25,6 +40,7 @@ import { ActivatedRoute } from '@angular/router';
     PresenteComponent,
     RecadoComponent,
     CommonModule,
+    RouterModule,
     MatProgressSpinnerModule,
   ],
   templateUrl: './app.component.html',
@@ -39,12 +55,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   activeMenu: any = '';
 
+  presentes: Presente[] = [];
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private httpService: HttpService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.carregarDados();
+  }
 
   ngAfterViewInit(): void {
     // Capturando o fragmento da URL
@@ -142,4 +163,31 @@ export class AppComponent implements OnInit, AfterViewInit {
       console.log('Rolou para cima');
     }
   }
+
+  carregarDados() {
+    this.httpService.get('presente').subscribe(
+      (response: any) => {
+        this.presentes = response || [];
+        console.log('presente app');
+        console.log('====================================');
+        console.log(this.presentes);
+        console.log('====================================');
+      },
+      (error) => {
+        console.error('Erro ao carregar dados', error);
+      }
+    );
+  }
 }
+
+// this.presentes_ = [...this.presentes];
+// this.presentes = this.presentes.sort((a, b) =>
+//   a.nome.localeCompare(b.nome)
+// );
+
+// console.log('presentes');
+
+// this.length = this.presentes.length; // Atualiza o total de itens
+
+// console.log(this.presentes);
+// this.updatePaginatedItems(0, this.pageSize);
