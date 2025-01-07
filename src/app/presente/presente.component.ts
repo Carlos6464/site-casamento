@@ -56,11 +56,31 @@ export class PresenteComponent implements OnInit, AfterViewInit {
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.httpService.get('presente').subscribe(
+      (response: any) => {
+        this.presentes = response || [];
+        this.presentes_ = [...this.presentes];
+        this.presentes = this.presentes.sort((a, b) =>
+          a.nome.localeCompare(b.nome)
+        );
+
+        console.log('presentes');
+
+        this.length = this.presentes.length; // Atualiza o total de itens
+
+        console.log(this.presentes);
+        this.updatePaginatedItems(0, this.pageSize);
+      },
+      (error) => {
+        console.error('Erro ao carregar dados', error);
+      }
+    );
+  }
 
   ngAfterViewInit(): void {
     this.presentes = [];
-    this.carregarDados();
+    // this.carregarDados();
   }
 
   carregarDados() {
