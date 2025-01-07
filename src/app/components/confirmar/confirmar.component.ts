@@ -80,9 +80,9 @@ export class ConfirmarComponent implements OnInit {
             this.redirectToLink();
             this.dialogRef.close('sucesso');
           },
-          (error) => {
+          (error: any) => {
             this.isloaed = false;
-            this.snackBar.open('Error ao selecionar presente!', 'X', {
+            this.snackBar.open(error.error.message, 'X', {
               duration: 3000,
               horizontalPosition: 'right',
               verticalPosition: 'bottom',
