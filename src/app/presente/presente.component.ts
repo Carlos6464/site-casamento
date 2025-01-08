@@ -67,25 +67,24 @@ export class PresenteComponent implements OnInit, AfterViewInit {
       (response: any) => {
         this.presentes = response || [];
         this.presentes_ = [...this.presentes];
-    this.presentes = this.presentes.sort((a, b) =>
-      a.nome.localeCompare(b.nome)
-    );
+        this.presentes = this.presentes.sort((a, b) =>
+          a.nome.localeCompare(b.nome)
+        );
 
-    console.log('presentes');
+      
+        this.length = this.presentes.length; // Atualiza o total de itens
 
-    this.length = this.presentes.length; // Atualiza o total de itens
-
-    console.log(this.presentes);
-    this.updatePaginatedItems(0, this.pageSize);
-        console.log('presente app response');
-        console.log('====================================');
-        console.log(response);
-        console.log('====================================');
-      },
-      (error) => {
-        console.error('Erro ao carregar dados', error);
-      }
-    );
+        console.log(this.presentes);
+        this.updatePaginatedItems(0, this.pageSize);
+            console.log('presente app response');
+            console.log('====================================');
+            console.log(response);
+            console.log('====================================');
+          },
+          (error) => {
+            console.error('Erro ao carregar dados', error);
+          }
+        );
   }
 
   onPageChange(event: PageEvent): void {
