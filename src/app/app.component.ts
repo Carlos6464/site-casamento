@@ -165,10 +165,5 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
  
-  @HostListener('touchmove', ['$event'])
-  onTouchMove(event: TouchEvent): void {
-    if ((event as any).scale !== 1) { // Se o evento de movimento está tentando dar zoom
-      event.preventDefault(); // Bloqueia o zoom
-    }
-  }
+ 
 }
