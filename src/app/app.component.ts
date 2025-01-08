@@ -71,7 +71,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Capturando o fragmento da URL
     this.route.fragment.subscribe((fragment) => {
       if (!this.activeMenu) this.activeMenu = 'home';
-      else   this.activeMenu = fragment;
+      else this.activeMenu = fragment;
       console.log('Fragmento:', this.activeMenu); // Exemplo: "recado"
     });
   }

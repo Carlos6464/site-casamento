@@ -26,6 +26,17 @@ export class HttpService {
     return this.http.get<T>(url, { headers });
   }
 
+  getSearch<T>(endpoint: string): Observable<T> {
+    const headers = new HttpHeaders({
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    });
+  
+    const url = `${this.apiUrl}${endpoint}`;
+    return this.http.get<T>(url, { headers });
+  }
+
   // Método POST
   post<T>(endpoint: string, body: any): Observable<T> {
     const headers = new HttpHeaders({

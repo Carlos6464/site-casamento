@@ -133,7 +133,7 @@ export class PresenteComponent implements OnInit, AfterViewInit {
   filtroPresenteComprado() {
     this.isloaed = true;
     this.httpService
-      .get(`presente/confirm?search=${this.filtroComprado}`)
+      .getSearch(`presente/confirm?search=${this.filtroComprado}`)
       .subscribe(
         (response: any) => {
           this.isloaed = false;
