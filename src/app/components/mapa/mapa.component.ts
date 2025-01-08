@@ -29,12 +29,11 @@ export class MapaComponent implements OnInit {
             zoomControl: false, // Remove os controles de zoom
             scrollWheelZoom: false, // Desativa o zoom com o scroll do mouse
             doubleClickZoom: false, // Desativa o zoom com duplo clique
+            attributionControl: false // Adiciona essa linha para desabilitar o controle de atribuição
           }).setView([-22.435247606044122, -44.04274307301314], 12);
 
           // Usar a camada OpenStreetMap para o mapa
-          leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          }).addTo(this.map);
+          leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(this.map);
 
             // Definir um ícone personalizado para o marcador
           const customIcon = leaflet.icon({
@@ -57,6 +56,15 @@ export class MapaComponent implements OnInit {
 
           // Associar o popup com o marcador
           marker.bindPopup(popupContent);
+
+          // Desabilitar a movimentação do mapa
+          this.map.dragging.disable(); // Desabilita o arrasto (movimentação) do mapa
+
+          // Desabilitar o zoom com o mouse, toques e duplo clique
+          this.map.scrollWheelZoom.disable(); // Desabilita o zoom com a roda do mouse
+          this.map.touchZoom.disable(); // Desabilita o zoom com toques (em dispositivos móveis)
+          this.map.doubleClickZoom.disable(); // Desabilita o zoom com duplo clique
+
         } else {
           console.error('Leaflet não foi carregado corretamente ou o método map não está disponível');
         }
