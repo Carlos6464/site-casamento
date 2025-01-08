@@ -81,6 +81,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif; 
   touch-action: manipulation; /* Desativa gestos de zoom */
   -ms-touch-action: manipulation; /* Compatibilidade com o IE */
+  user-select: none; /* Impede seleção de texto (ajuda a prevenir zoom por seleção) */
 }
 
 /* Verifique se a posição está correta e visível */
