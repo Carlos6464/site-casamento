@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.carregarDados();
+   
   }
 
   ngAfterViewInit(): void {
@@ -164,20 +164,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  carregarDados() {
-    this.httpService.get('presente').subscribe(
-      (response: any) => {
-        this.presentes = response || [];
-        console.log('presente app response');
-        console.log('====================================');
-        console.log(response);
-        console.log('====================================');
-      },
-      (error) => {
-        console.error('Erro ao carregar dados', error);
-      }
-    );
-  }
+ 
 }
 
 // this.presentes_ = [...this.presentes];

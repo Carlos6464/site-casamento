@@ -41,8 +41,7 @@ interface Presente {
 export class PresenteComponent implements OnInit, AfterViewInit {
   private httpService = inject(HttpService);
 
-  @Input() presentes: Presente[] = [];
-
+  presentes: Presente[] = [];
   presentes_: Presente[] = [];
   paginatedItems: Presente[] = [];
 
@@ -64,7 +63,10 @@ export class PresenteComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   carregarDados() {
-    this.presentes_ = [...this.presentes];
+    this.httpService.get('presente').subscribe(
+      (response: any) => {
+        this.presentes = response || [];
+        this.presentes_ = [...this.presentes];
     this.presentes = this.presentes.sort((a, b) =>
       a.nome.localeCompare(b.nome)
     );
@@ -75,6 +77,15 @@ export class PresenteComponent implements OnInit, AfterViewInit {
 
     console.log(this.presentes);
     this.updatePaginatedItems(0, this.pageSize);
+        console.log('presente app response');
+        console.log('====================================');
+        console.log(response);
+        console.log('====================================');
+      },
+      (error) => {
+        console.error('Erro ao carregar dados', error);
+      }
+    );
   }
 
   onPageChange(event: PageEvent): void {
