@@ -165,16 +165,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
  
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent): void {
+    if ((event as any).scale !== 1) { // Se o evento de movimento está tentando dar zoom
+      event.preventDefault(); // Bloqueia o zoom
+    }
+  }
 }
-
-// this.presentes_ = [...this.presentes];
-// this.presentes = this.presentes.sort((a, b) =>
-//   a.nome.localeCompare(b.nome)
-// );
-
-// console.log('presentes');
-
-// this.length = this.presentes.length; // Atualiza o total de itens
-
-// console.log(this.presentes);
-// this.updatePaginatedItems(0, this.pageSize);
