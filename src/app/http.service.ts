@@ -21,7 +21,9 @@ export class HttpService {
       Pragma: 'no-cache',
       Expires: '0',
     });
-    return this.http.get<T>(`${this.apiUrl}${endpoint}`, { headers });
+  
+    const url = `${this.apiUrl}${endpoint}?timestamp=${new Date().getTime()}`;
+    return this.http.get<T>(url, { headers });
   }
 
   // Método POST
