@@ -73,8 +73,15 @@ html {
 
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+  height: 100%;  
+}
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  touch-action: manipulation; /* Desativa gestos de zoom */
+  -ms-touch-action: manipulation; /* Compatibilidade com o IE */
+}
 
 /* Verifique se a posição está correta e visível */
 
