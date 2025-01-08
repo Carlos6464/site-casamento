@@ -64,7 +64,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-   
+    window.addEventListener('touchstart', function (e) {
+      if (e.touches.length > 1) { // Se houver mais de um toque, bloqueia o zoom
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('touchmove', function (e:any) {
+      if (e.scale !== 1) { // Se o evento de movimento está tentando dar zoom
+        e.preventDefault(); // Bloqueia o zoom
+      }
+    }, { passive: false });
   }
 
   ngAfterViewInit(): void {
