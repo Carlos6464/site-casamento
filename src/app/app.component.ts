@@ -168,9 +168,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.httpService.get('presente').subscribe(
       (response: any) => {
         this.presentes = response || [];
-        console.log('presente app');
+        console.log('presente app response');
         console.log('====================================');
-        console.log(this.presentes);
+        console.log(response);
         console.log('====================================');
       },
       (error) => {
