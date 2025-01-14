@@ -4,11 +4,16 @@
   <p>Carregando...</p>
 </div> -->
 
-<div >
+<div *ngIf="issafari">
+  <app-error></app-error>
+</div>
+
+<div *ngIf="!issafari">
   <div class="menu-container">
     <nav class="desktop-menu">
         <ul>
           <li><a href="#home" (click)="scrollTo('home')"  [ngStyle]="activeMenu === 'home' ? {'text-decoration': 'underline'} : {}" >Home</a></li>
+          <li><a href="#presenca" (click)="scrollTo('cerimonia')"  [ngStyle]="activeMenu === 'presenca' ? {'text-decoration': 'underline'} : {}" >Confirme sua presença</a></li>
           <li><a href="#casal" (click)="scrollTo('casal')"   [ngStyle]="activeMenu === 'casal' ? {'text-decoration': 'underline'} : {}"  >O casal</a></li>
           <li><a href="#cerimonia" (click)="scrollTo('cerimonia')"  [ngStyle]="activeMenu === 'cerimonia' ? {'text-decoration': 'underline'} : {}" >Cerimônia</a></li>
           <li><a href="#presente" (click)="scrollTo('presente')" [ngStyle]="activeMenu === 'presente' ? {'text-decoration': 'underline'} : {}" >Lista de presentes</a></li>
@@ -26,6 +31,7 @@
       <div class="side-menu" [class.open]="menuOpen">
         <ul>
           <li><a href="#home" (click)="closeMenu()" [ngStyle]="activeMenu === 'home' ? {'background-color': '#7f56c9'} : {}">Home</a></li>
+          <li><a href="#presenca" (click)="closeMenu()"  [ngStyle]="activeMenu === 'presenca' ? {'background-color': '#7f56c9'} : {}">Confirme sua presença</a></li>
           <li><a href="#casal" (click)="closeMenu()"  [ngStyle]="activeMenu === 'casal' ? {'background-color': '#7f56c9'} : {}">O casal</a></li>
           <li><a href="#cerimonia" (click)="closeMenu()"  [ngStyle]="activeMenu === 'cerimonia' ? {'background-color': '#7f56c9'} : {}">Cerimônia</a></li>
           <li><a href="#presente" (click)="closeMenu()"  [ngStyle]="activeMenu === 'presente' ? {'background-color': '#7f56c9'} : {}">Lista de presentes</a></li>
@@ -38,6 +44,9 @@
   <div>
     <section id="home">
       <app-home></app-home>
+    </section>
+    <section id="presenca">
+      <app-presenca></app-presenca>
     </section>
     <section id="casal">
       <app-casal></app-casal>

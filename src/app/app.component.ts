@@ -14,10 +14,12 @@ import { CerimoniaComponent } from './cerimonia/cerimonia.component';
 import { PresenteComponent } from './presente/presente.component';
 import { RecadoComponent } from './recado/recado.component';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { routes } from './app.routes';
 import { HttpService } from './http.service';
+import platform from 'platform';
+import { PresencaComponent } from './presenca/presenca.component';
+import { ErrorComponent } from './error/error.component';
 
 interface Presente {
   id: number;
@@ -42,6 +44,8 @@ interface Presente {
     CommonModule,
     RouterModule,
     MatProgressSpinnerModule,
+    PresencaComponent,
+    ErrorComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -54,6 +58,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   isVisible = false;
 
   activeMenu: any = '';
+  issafari: boolean = false;
 
   presentes: Presente[] = [];
 
@@ -64,17 +69,18 @@ export class AppComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-  
-  }
+    if (this.isSafari()) {
+      this.issafari = true;
+    }
 
-  ngAfterViewInit(): void {
     // Capturando o fragmento da URL
     this.route.fragment.subscribe((fragment) => {
-      if (!this.activeMenu) this.activeMenu = 'home';
-      else this.activeMenu = fragment;
-      console.log('Fragmento:', this.activeMenu); // Exemplo: "recado"
+      if (fragment) this.activeMenu = fragment;
+      else if (!fragment) this.activeMenu = 'home';
     });
   }
+
+  ngAfterViewInit(): void {}
 
   // Alterna o menu hamburguer
   toggleMenu(): void {
@@ -164,6 +170,34 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
- 
- 
+  // isSafari(): boolean {
+  //   const userAgent = navigator.userAgent.toLowerCase();
+  //   const vendor = navigator.vendor?.toLowerCase();
+
+  //   console.log('====================================');
+  //   console.log('User Agent:', userAgent);
+  //   console.log('Vendor:', vendor);
+  //   console.log('====================================');
+
+  //   const isSafariUserAgent =
+  //     userAgent.includes('safari') &&
+  //     !userAgent.includes('crios') &&
+  //     !userAgent.includes('fxios');
+  //   const isAppleVendor = vendor === 'apple inc.';
+
+  //   console.log('isSafariUserAgent:', isSafariUserAgent);
+  //   console.log('isAppleVendor:', isAppleVendor);
+
+  //   const isSafari = isSafariUserAgent && isAppleVendor;
+
+  //   console.log('isSafari:', isSafari);
+  //   console.log('====================================');
+
+  //   return isSafari;
+  // }
+
+  isSafari(): boolean {
+    const browserName = platform.name?.toLowerCase();
+    return browserName === 'safari';
+  }
 }
